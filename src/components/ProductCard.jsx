@@ -2,14 +2,14 @@ function ProductCard(props) {
   const { product } = props;
 
   return (
-    <div className="max-w-sm rounded-xl overflow-hidden shadow-lg">
+    <div className="relative  max-w-sm rounded-xl overflow-hidden shadow-lg">
       <img
         className="w-full h-60 object-cover"
         src={product.image}
         alt="product image"
       />
 
-      <div className="px-6 py-4">
+      <div className="max-h-32 mb-24 px-6 py-4">
         <div className="font-bold text-xl mb-2">{product.title}</div>
         <div className="flex mb-2">
           <svg
@@ -86,7 +86,7 @@ function ProductCard(props) {
         </div>
         <p className="text-gray-700 text-base">{product.description}</p>
       </div>
-      <div className="flex justify-between mb-2 px-6 pt-4 pb-2">
+      <div className="absolute w-full bottom-0  flex justify-between mb-2 px-6 pt-4 pb-2">
         <div className="font-bold text-lg">${product.price}</div>
         <button className="flex gap-2 border px-2 py-1 rounded-lg cursor-pointer hover:bg-gray-100">
           <svg
