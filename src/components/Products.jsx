@@ -1,4 +1,4 @@
-import ProductCard from "./ProductCard";
+import ProductCard from "./ProductCard";      
 
 function Products({ products = [] }) {
   return (

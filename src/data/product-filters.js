@@ -1,13 +1,35 @@
-import { products } from "./products";
+import { products as DBProducts } from "./products";
 
-export const getVisibleProducts = (categories) => {
-  if (categories.length === 0) {
-    return products;
+export const getVisibleProducts = (
+  selectedCategories,
+  selectedRating,
+  initPriceRange
+) => {
+  let products = DBProducts;
+
+  if (selectedCategories.length === 0 && !selectedRating) {
+    return DBProducts;
   }
 
-  const filterdProducts = products.filter((product) =>
-    categories.includes(product.category)
-  );
+  if (selectedRating) {
+    products = products.filter((product) => product.rating >= selectedRating);
+  }
 
-  return filterdProducts;
+  if (selectedCategories.length > 0) {
+    products = products.filter((product) =>
+      selectedCategories.includes(product.category)
+    );
+  }
+
+  if (initPriceRange.isApplied) {
+    // console.log("initPriceRange", initPriceRange);
+
+    products = products.filter(
+      (product) =>
+        product.price >= initPriceRange.min &&
+        product.price <= initPriceRange.max
+    );
+  }
+
+  return products;
 };
