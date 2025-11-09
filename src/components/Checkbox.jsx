@@ -9,12 +9,15 @@ const Checkbox = ({
 }) => {
   return (
     <div className={`relative flex items-center ${className}`}>
-      <div className="flex items-center h-5 ">
+      <div className="flex items-center">
         <input
-          id={id}
+          id={id || `checkbox-${text}`}
           type="checkbox"
-          className={`w-4 h-4 rounded cursor-pointer
-            ${checkboxClassName}`}
+          className={`w-5 h-5 rounded cursor-pointer transition-all focus:ring-2 focus:ring-offset-2 ${
+            checked
+              ? "bg-blue-600 border-blue-600 focus:ring-blue-500"
+              : "bg-white border-gray-300 focus:ring-blue-500"
+          } ${checkboxClassName || ""}`}
           checked={checked}
           {...props}
         />
@@ -22,9 +25,10 @@ const Checkbox = ({
 
       {text && (
         <label
-          htmlFor={id}
-          className={`ml-3 text-md cursor-pointer font-medium 
-            ${labelClassName}`}
+          htmlFor={id || `checkbox-${text}`}
+          className={`ml-3 text-sm cursor-pointer select-none ${
+            labelClassName || "text-gray-700"
+          }`}
         >
           {text}
         </label>

@@ -1,39 +1,30 @@
-import { useState } from "react";
-
-import CategoryFilter from "./components/CategoryFilter";
-import Products from "./components/Products";
-
-import { getVisibleProducts } from "./data/product-filters";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { CartProvider } from "./context/CartContext";
+import Header from "./components/Header";
+import CartDrawer from "./components/CartDrawer";
+import Home from "./pages/Home";
+import Collection from "./pages/Collection";
+import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
+import ProductDetail from "./pages/ProductDetail";
 
 function App() {
-  const [selectedCategories, setSelectedCategories] = useState([]);
-
-  const filterProducts = getVisibleProducts(selectedCategories);
-
-  const onChangeCategoryHandler = (category, isChecked) => {
-    if (isChecked) {
-      setSelectedCategories([...selectedCategories, category]);
-    } else {
-      setSelectedCategories(
-        selectedCategories.filter((cat) => cat !== category)
-      );
-    }
-  };
-
   return (
-    <div>
-      <div className="grid grid-cols-12 gap-3 my-2 mx-2">
-        <div className="col-span-2">
-          <CategoryFilter
-            selectedCategories={selectedCategories}
-            onChangeCategory={onChangeCategoryHandler}
-          />
+    <CartProvider>
+      <Router>
+        <div className="min-h-screen bg-gray-50">
+          <Header />
+          <CartDrawer />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/collection" element={<Collection />} />
+            <Route path="/product/:id" element={<ProductDetail />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<Checkout />} />
+          </Routes>
         </div>
-        <div className="col-span-10">
-          <Products products={filterProducts} />
-        </div>
-      </div>
-    </div>
+      </Router>
+    </CartProvider>
   );
 }
 
