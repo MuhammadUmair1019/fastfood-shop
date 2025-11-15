@@ -1,13 +1,17 @@
+import { Link } from "react-router-dom";
+
 function ProductCard(props) {
   const { product } = props;
 
   return (
     <div className="relative  max-w-sm rounded-xl overflow-hidden shadow-lg">
-      <img
-        className="w-full h-60 object-cover"
-        src={product.image}
-        alt="product image"
-      />
+      <Link to={`/products/${product.id}`}>
+        <img
+          className="w-full h-60 object-cover"
+          src={product.image}
+          alt="product image"
+        />
+      </Link>
 
       <div className="max-h-32 mb-24 px-6 py-4">
         <div className="font-bold text-xl mb-2">{product.title}</div>
