@@ -91,7 +91,7 @@ function ProductCard(props) {
         <p className="text-gray-700 text-base">{product.description}</p>
       </div>
       <div className="absolute w-full bottom-0  flex justify-between mb-2 px-6 pt-4 pb-2">
-        <div className="font-bold text-lg">${product.price}</div>
+        <div className="font-bold text-lg">RS {product.price}</div>
         <button className="flex gap-2 border px-2 py-1 rounded-lg cursor-pointer hover:bg-gray-100">
           <svg
             xmlns="http://www.w3.org/2000/svg"
