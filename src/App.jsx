@@ -5,6 +5,8 @@ import Header from "./components/Header";
 import NotFound from "./pages/NotFound";
 import ProductDetail from "./pages/ProductDetail";
 
+import ParentComponent from "./pages/CounterApp/ParentComponent";
+
 const routes = ["/", "/collection"];
 
 function App() {
@@ -16,8 +18,8 @@ function App() {
       <Routes>
         <Route index element={<Home />} />
         <Route path="/products" element={<Collection />} />
+        <Route path="/counter" element={<ParentComponent />} />
         <Route path="/products/:id" element={<ProductDetail />} />
-        {/* <Collection /> */}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

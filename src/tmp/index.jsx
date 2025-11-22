@@ -1,20 +1,22 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+
+export const CartContext = useContext()
 
 export default function CartProvider() {
   const [cartItems, setCartItems] = useState([]);
 
   const addToCart = (cartItem, cartQty, cartDrink) => {
-    let index = cartItems.findIndex(
+    let productIndex = cartItems.findIndex(
       (itm) => itm.id === cartItem.id && itm.cartDrink === cartDrink
     );
 
-    if (index === -1) {
-      const product = { ...cartItem, cartQty, cartDrink };
+    if (productIndex === -1) {
+      let product = { ...cartItem, cartQty, cartDrink };
+
       setCartItems([...cartItems, product]);
     } else {
       const copyCartItems = [...cartItems];
-      copyCartItems[index].cartQty += cartQty;
-
+      copyCartItems[productIndex].cartQty += cartQty;
       setCartItems([...copyCartItems]);
     }
   };
@@ -44,18 +46,28 @@ export default function CartProvider() {
     setCartItems([...filterdCartItems]);
   };
 
-  
   const getTotalItems = () => {
     return cartItems.reduce((total, item) => total + item.quantity, 0);
   };
 
   const getTotalPrice = () => {
-    return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+    return cartItems.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
   };
 
-  
+  return (
+    <CartContext.Provider value={{
+      cartItems,
+      addToCart
+    }}>
+    
+  </CartContext.Provider>
 
+  )
 }
+// }
 
 // -----------------------------------------
 // function GrandChild(props) {
@@ -64,7 +76,7 @@ export default function CartProvider() {
 // }
 
 // function Child(props) {
-//   return <GrandChild x={props} />;
+//   return <GrandChild x={props.x} />;
 // }
 
 // function Parent(props) {
